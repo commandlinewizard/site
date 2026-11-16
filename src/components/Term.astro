@@ -1,0 +1,17 @@
+---
+// A terminal block: the command after a prompt, optional output, and a copy button.
+interface Props {
+  cmd: string;
+  out?: string;
+  error?: boolean; // show the output as an error (red)
+  copy?: boolean;
+}
+const { cmd, out, error = false, copy = true } = Astro.props;
+const lines = cmd.split("\n");
+---
+<div class="term">
+  <pre><code>{lines.map((l, i) => (
+    <>{i === 0 ? <span class="ps1">$ </span> : <span class="ps1">{"  "}</span>}{l}{"\n"}</>
+  ))}{out && <span class={error ? "err" : "out"}>{out}</span>}</code></pre>
+  {copy && <button class="copy" type="button" data-cmd={cmd} aria-label={`Copy command: ${cmd}`}>copy</button>}
+</div>

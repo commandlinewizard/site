@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+import headSvg from "../assets/wizard-head.svg?raw";
+
+// the wizard's head as a small inline mark in the prompt bar (decorative)
+const mark = headSvg
+  .replace(/^<\?xml[^>]*>\s*/, "")
+  .replace(/<title>[^<]*<\/title>/, "")
+  .replaceAll(' id="', ' data-part="')
+  .replace("<svg ", '<svg aria-hidden="true" focusable="false" ');
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string; // shown in the prompt bar, e.g. "~/spells/jq"
+}
+const { title, description, path = "~" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Mastodon profile verification (the Website field shows as verified) -->
+    <link rel="me" href="https://mastodon.social/@commandlinewizard" />
+    <link rel="preload" href="/fonts/JetBrainsMono-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0d1117" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="prompt-bar" aria-label="Site">
+        <span class="mark" set:html={mark} /><a href="/">wizard@tower</a><span class="path">{path}</span><span>$</span><span class="cursor" aria-hidden="true"></span>
+      </header>
+      <slot />
+    </div>
+    <script>
+      // Copy buttons: copy the command text only (no prompt, no output).
+      for (const btn of document.querySelectorAll<HTMLButtonElement>("button.copy")) {
+        btn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(btn.dataset.cmd ?? "");
+            btn.textContent = "copied";
+            btn.dataset.done = "";
+            setTimeout(() => { btn.textContent = "copy"; delete btn.dataset.done; }, 1600);
+          } catch {
+            btn.textContent = "select + ctrl+c";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

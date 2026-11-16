@@ -1,0 +1,44 @@
+---
+// The wizard guide character, inlined as static SVG (no animation on the site), with an
+// optional speech bubble. Art: src/lib/wizard.
+import { wizardSvg, type Expression, type Pose } from "../lib/wizard/index.ts";
+
+interface Props {
+  pose: Pose;
+  expression?: Expression;
+  size?: number; // rendered width in px (height follows the 400 x 500 art)
+  say?: string;
+  title?: string; // accessible name; defaults to the line he says
+}
+const { pose, expression = "neutral", size = 96, say, title } = Astro.props;
+const label = title ?? (say ? `The wizard, deadpan: ${say}` : undefined);
+const svg = wizardSvg({ pose, expression, cursorOn: true, title: label });
+---
+<figure class="wizard" style={`--w: ${size}px`}>
+  <div class="art" set:html={svg} />
+  {say && <figcaption class="bubble" aria-hidden="true">{say}</figcaption>}
+</figure>
+
+<style>
+  .wizard { display: flex; align-items: center; gap: 0.9rem; margin: 0 0 1.25rem; }
+  .art { flex: none; width: var(--w); }
+  .art :global(svg) { display: block; width: 100%; height: auto; }
+  .bubble {
+    position: relative;
+    max-width: 42ch; /* border-box: about 38 characters of text per line */
+    padding: 0.6rem 0.9rem;
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: var(--step-0);
+    font-weight: 700;
+  }
+  /* tail pointing at the wizard */
+  .bubble::before, .bubble::after {
+    content: ""; position: absolute; top: 50%; right: 100%; transform: translateY(-50%);
+    border: 8px solid transparent;
+  }
+  .bubble::before { border-right-color: var(--line); }
+  .bubble::after { border-right-color: var(--raised); margin-right: -1px; }
+</style>

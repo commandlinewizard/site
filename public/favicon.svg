@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="266" height="266" viewBox="0 0 266 266">
+  <title>head</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <g id="head-art">
+      <g id="head">
+        <circle cx="133" cy="197" r="46" fill="#f1c7a5"/>
+        <g id="face-slot">
+          <g id="face-smug">
+            <g id="lens">
+              <circle cx="112" cy="199" r="19" fill="#e6edf3"/>
+              <circle cx="154" cy="199" r="19" fill="#e6edf3"/>
+            </g>
+            <g id="eyes">
+              <circle cx="107" cy="203" r="5.5" fill="#0d1117"/>
+              <circle cx="149" cy="203" r="5.5" fill="#0d1117"/>
+            </g>
+            <g id="lids">
+              <path d="M93.2 196 C94.565 186.668 102.569 179.75 112 179.75 C121.431 179.75 129.435 186.668 130.8 196 Z" fill="#f1c7a5"/>
+              <path d="M135.2 196 C136.565 186.668 144.569 179.75 154 179.75 C163.431 179.75 171.435 186.668 172.8 196 Z" fill="#f1c7a5"/>
+            </g>
+            <g id="frame">
+              <circle cx="112" cy="199" r="19" fill="none" stroke="#0d1117" stroke-width="5"/>
+              <circle cx="154" cy="199" r="19" fill="none" stroke="#0d1117" stroke-width="5"/>
+              <path d="M131 197 C132.333 193.667 133.667 193.667 135 197" fill="none" stroke="#0d1117" stroke-width="4"/>
+              <path d="M127.214 188.754 L137.116 187.363 C137.663 187.286 138.169 187.667 138.246 188.214 L139.777 199.107 C139.854 199.653 139.472 200.159 138.926 200.236 L129.023 201.628 C128.476 201.705 127.97 201.324 127.893 200.777 L126.363 189.884 C126.286 189.337 126.667 188.831 127.214 188.754 Z" fill="#e6edf3"/>
+              <line x1="129" y1="192" x2="137" y2="191" fill="#000000" stroke="#c9d1d9" stroke-width="1.5"/>
+            </g>
+            <g id="brows">
+              <line x1="99" y1="177" x2="125" y2="177" fill="none" stroke="#c9d1d9" stroke-width="7" stroke-linecap="round"/>
+              <line x1="141" y1="172" x2="167" y2="169" fill="none" stroke="#c9d1d9" stroke-width="7" stroke-linecap="round"/>
+            </g>
+          </g>
+        </g>
+        <path d="M84 173 C81 219 95 245 133 263 C171 245 185 219 182 173 L175 173 C178 203 173 223 158 230 C141.333 237.333 124.667 237.333 108 230 C93 223 88 203 91 173 Z" fill="#c9d1d9"/>
+        <circle cx="133" cy="221" r="10" fill="#dca381"/>
+        <ellipse cx="116" cy="233" rx="22" ry="10" fill="#c9d1d9"/>
+        <ellipse cx="150" cy="233" rx="22" ry="10" fill="#c9d1d9"/>
+        <path d="M75 157 L191 157 L153 53 C146 31 157 11 185 11 C161 -3 131 9 124 41 Z" fill="#a371f7"/>
+        <polygon points="80,141 186,141 191,157 75,157" fill="#7c4fd6"/>
+        <ellipse cx="133" cy="159" rx="94" ry="15" fill="#7c4fd6"/>
+        <text transform="matrix(1 0 0 1 136 111)" x="0" y="0" xml:space="preserve" font-family="&apos;JetBrains Mono&apos;, monospace" font-size="28" font-weight="800" fill="#e3b341" text-anchor="middle"><tspan x="0" y="0">{ }</tspan></text>
+      </g>
+      <g id="duck">
+        <ellipse cx="195" cy="237" rx="22" ry="14" fill="#e3b341"/>
+        <path d="M175 231 C169.667 227 168.333 223 171 219 C175 221.667 178.333 224.333 181 227 Z" fill="#e3b341"/>
+        <circle cx="205" cy="219" r="12" fill="#e3b341"/>
+        <polygon points="215,217 227,220 215,224" fill="#f0883e"/>
+        <circle cx="208" cy="216" r="2.2" fill="#0d1117"/>
+        <polygon points="193,210 217,210 207,185" fill="#a371f7"/>
+        <ellipse cx="205" cy="210" rx="15" ry="3.5" fill="#7c4fd6"/>
+      </g>
+    </g>
+  </g>
+</svg>

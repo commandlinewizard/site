@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+import { releasedSpells } from "../lib/spells";
+
+// Released episodes only (drafts with CW_DRAFTS=1). Zero released = the coming-soon state.
+const spells = await releasedSpells();
+const total = spells.length;
+const youtube = "https://www.youtube.com/@CommandLineWizard";
+---
+<Base title="Command Line Wizard: terminal spells in 2 minutes" description="Cheat sheets for the Command Line Wizard videos: one terminal tool in 2 minutes, and here every option and copy-paste recipe that goes with it." path="~/spells">
+  <main>
+    <section class="intro">
+      <h1>Command Line Wizard</h1>
+      <p>One terminal tool in 2 minutes on YouTube. Here: the spellbook. Every option,
+        every recipe, ready to copy.</p>
+    </section>
+
+    {total === 0 ? (
+      <div class="term ls" role="region" aria-label="Spells">
+        <pre><code><span class="ps1">$ </span>ls -l ~/spells
+<span class="out">total 0</span>
+<span class="ps1">$ </span>cat ~/spells/.plan
+<span class="tag">Spells in rehearsal.</span>
+<span class="tag">First episodes: December 2026.</span>
+<span class="ps1">$ </span><span class="cursor-inline" aria-hidden="true"></span></code></pre>
+      </div>
+      <p class="next">Until then: <a href={youtube}>subscribe on YouTube</a> and the first spell finds you.</p>
+    ) : (
+      <>
+        <div class="term ls" role="region" aria-label="All spells">
+          <pre><code><span class="ps1">$ </span>ls -l ~/spells
+<span class="out">total {total}</span>
+{spells.map((s) => (
+<><span class="perm">{s.data.published ? "-rwxr-xr-x" : "-rw-r--r--"}</span>  <span class="ep">ep{String(s.data.episode).padStart(2, "0")}</span>  <a href={`/${s.data.tool}`}>{s.data.tool.padEnd(10, " ")}</a><span class="tag">{s.data.tagline}</span>{"\n"}</>
+))}</code></pre>
+        </div>
+        <p class="next">New spells every week. <a href={youtube}>Watch them on YouTube.</a></p>
+      </>
+    )}
+  </main>
+</Base>
+
+<style>
+  .intro { padding: 3rem 0 1.5rem; }
+  h1 {
+    font-size: clamp(2.25rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--purple);
+    margin: 0 0 1rem;
+    max-width: 12ch;
+  }
+  .intro p { color: var(--dim); max-width: 52ch; }
+  .ls pre { font-size: var(--step-0); line-height: 1.9; padding-right: 1rem; }
+  .ls a { color: var(--green); font-weight: 700; text-decoration: none; white-space: pre; }
+  .ls a:hover { text-decoration: underline; }
+  .perm, .ep { color: var(--dim); }
+  .tag { color: var(--text); }
+  .next { color: var(--dim); font-size: var(--step--1); margin-top: 1.5rem; }
+  .next a { color: var(--green); }
+  .cursor-inline { display: inline-block; width: 0.6em; height: 1.1em; vertical-align: text-bottom; background: var(--green); animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor-inline { animation: none; } }
+</style>
